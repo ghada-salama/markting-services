@@ -1,0 +1,1129 @@
+<?php
+
+namespace AppBundle\Entity;
+
+use Doctrine\ORM\Mapping as ORM;
+use JMS\Serializer\Annotation as JMSSerializer;
+use Symfony\Component\Validator\Constraints as Assert;
+
+/**
+ * Activity
+ *
+ * @ORM\Table(name="activity")
+ * @ORM\Entity(repositoryClass="AppBundle\Repository\ActivityRepository")
+ */
+class Activity
+{
+     /**
+     * @var int
+     *
+     * @ORM\Column(name="id", type="integer")
+     * @ORM\Id
+     * @ORM\GeneratedValue(strategy="AUTO")
+     * @JMSSerializer\Groups({"show_activities"})
+     * 
+     */
+    private $id;
+
+
+     /**
+     * @var int
+     * @JMSSerializer\Groups({"show_activities"})
+     * @JMSSerializer\Accessor(getter="getMergedId")
+     * @JMSSerializer\SerializedName("activity_id")
+     * @JMSSerializer\Type("string")
+     */
+    private $activity_id;
+
+
+
+
+    /**
+     * @ORM\ManyToOne(targetEntity="Client", inversedBy="activities")
+     * @ORM\JoinColumn(name="client_id", referencedColumnName="id")
+     * @JMSSerializer\Groups({"show_activities","get_add_activity","show_activities_list"})
+     */
+    private $client;
+
+
+
+    /**
+     * @ORM\ManyToOne(targetEntity="Brand", inversedBy="activities")
+     * @ORM\JoinColumn(name="brand_id", referencedColumnName="id")
+     * @JMSSerializer\Groups({"show_activities","get_add_activity","show_activities_list"})
+     */
+    private $brand;
+
+
+    /**
+     * @var int
+     *
+     * @ORM\Column(name="wYear", type="integer",nullable=true)
+     * @JMSSerializer\Groups({"show_activities","get_add_activity","show_activities_list"})
+     */
+    private $wYear;
+
+    /**
+     * @var int
+     *
+     * @ORM\Column(name="old_id", type="integer",nullable=true)
+     * @JMSSerializer\Groups({"show_activities","get_add_activity"})
+     */
+    private $old_id;
+
+
+    /**
+     * @var int
+     *
+     * @ORM\Column(name="wMonth", type="integer",nullable=true)
+     * @JMSSerializer\Groups({"show_activities","get_add_activity","show_activities_list"})
+     */
+    private $wMonth;
+
+  
+
+    /**
+     * @var int
+     *
+     * @ORM\Column(name="wHalf", type="integer",nullable=true)
+     * @JMSSerializer\Groups({"show_activities","get_add_activity","show_activities_list"})
+     */
+    private $wHalf;
+
+
+
+     /**
+     * @ORM\ManyToOne(targetEntity="User", inversedBy="myUpdate")
+     * @ORM\JoinColumn(name="lastUpdatedBy", referencedColumnName="id")
+     * @JMSSerializer\Groups({"show_activities","get_add_activity"})
+     */
+    private $lastUpdatedBy;
+
+    /**
+     * @var string
+     * @ORM\Column(name="lastUpdatedAt", type="datetime", length=255,nullable=true)
+     * @JMSSerializer\Groups({"show_activities","get_add_activity"})
+     */
+    private $lastUpdatedAt;
+
+
+    /**
+     * @var string
+     * @JMSSerializer\Expose
+     * @ORM\Column(name="offer", type="string", length=255,nullable=true)
+     * @Assert\NotBlank(groups={"show_activities"})
+     */
+    private $offer;
+
+    /**
+     * @var int
+     *
+     * @ORM\Column(name="Status", type="integer",nullable=true)
+     * @JMSSerializer\Groups({"show_activities"})
+     */
+    private $Status;
+
+    /**
+     * @var string
+     *
+     * @ORM\Column(name="gama", type="string", length=255,nullable=true)
+     * @JMSSerializer\Groups({"show_activities"})
+     */
+    private $gama;
+
+    /**
+     * @var string
+     *
+     * @ORM\Column(name="kpi",type="decimal",nullable=true)
+     * @JMSSerializer\Groups({"show_activities"})
+     */
+    private $kpi;
+
+    /**
+     *
+     * @ORM\ManyToOne(targetEntity="header", inversedBy="activities")
+     * @ORM\JoinColumn(name="header", referencedColumnName="id")
+     * @JMSSerializer\Groups({"show_activities","get_add_activity"})
+     */
+    private $header;
+
+  
+
+
+    /**
+     * @var string
+     *
+     * @ORM\Column(name="additional", type="string", length=255,nullable=true)
+     * @JMSSerializer\Groups({"show_activities","get_add_activity"})
+     */
+    private $additional;
+
+
+
+
+         /**
+     * @var string
+     *
+     * @ORM\Column(name="headerExtraInfo", type="string", length=255,nullable=true)
+     * @JMSSerializer\Groups({"show_activities","get_add_activity"})
+     */
+    private $headerExtraInfo;
+
+  
+
+    /**
+
+     * @ORM\Column(name="headerlastUpdateBy", type="string", length=255,nullable=true)
+     * @JMSSerializer\Groups({"show_activities","get_add_activity"})
+     */
+    private $headerlastUpdateBy;
+
+  
+
+
+
+
+
+    /**
+     * @ORM\ManyToOne(targetEntity="ExpositionQuality", inversedBy="activities")
+     * @ORM\JoinColumn(name="exposition_Quality_id", referencedColumnName="id",nullable=true)
+     */
+    private $exposition_Quality;
+
+    /**
+     * @ORM\ManyToOne(targetEntity="OfferQuality", inversedBy="activities")
+     * @ORM\JoinColumn(name="Offer_Quality_id", referencedColumnName="id",nullable=true)
+     */
+    private $Offer_Quality;
+
+     
+   
+
+    /**
+     * @var int
+     *
+     * @ORM\ManyToOne(targetEntity="msImpact", inversedBy="activities")
+     * @ORM\JoinColumn(name="ms_impact", referencedColumnName="id",nullable=true)
+     * @JMSSerializer\Groups({"show_activities"})
+     */
+    private $ms_impact;
+
+    /**
+     * @ORM\OneToMany(targetEntity="AppBundle\Entity\shops", mappedBy="activity")
+     */
+    private $shops;
+
+
+
+
+    /**
+     * @var int
+     * @JMSSerializer\Groups({"show_activities"})
+     * @JMSSerializer\Accessor(getter="getHqShops")
+     * @JMSSerializer\SerializedName("hqShops")
+     */
+    private $hqShops;
+
+    /**
+     * @var int
+     * @JMSSerializer\Groups({"show_activities"})
+     * @JMSSerializer\Accessor(getter="getGpvShops")
+     * @JMSSerializer\SerializedName("gpvShops")
+     */
+    private $gpvShops;
+
+    /**
+     * @var int
+     * @JMSSerializer\Groups({"show_activities"})
+     * @JMSSerializer\Accessor(getter="getTotalShops")
+     * @JMSSerializer\SerializedName("TotalShops")
+     */
+    private $TotalShops;
+
+        /**
+     * @var int
+     * @JMSSerializer\Groups({"show_activities"})
+     * @JMSSerializer\Accessor(getter="getAllShops")
+     * @JMSSerializer\SerializedName("allShops")
+     */
+    private $allShops;
+
+    
+
+
+
+
+
+    /**
+     * Get id
+     *
+     * @return integer
+     */
+    public function getId()
+    {
+       
+        return $this->id  ;
+       
+    }
+
+      /**
+     * Get id
+     *
+     * @return integer
+     */
+    public function setId($id)
+    {
+       
+        //return $this->id  ;
+        $this->id = $id;
+       
+    }
+
+
+    /**
+     * Get id
+     *
+     * @return integer
+     */
+    public function getMergedId()
+    {
+        //return 6;
+        //return $this->id  ;
+        return  $this->client->getID().'-'.$this->brand->getID().'-'.$this->wYear.'-'.$this->wMonth.'-'.$this->wHalf;
+    }
+
+    /**
+     * Set wYear
+     *
+     * @param integer $wYear
+     *
+     * @return Activity
+     */
+    public function setWYear($wYear)
+    {
+        $this->wYear = $wYear;
+
+        return $this;
+    }
+
+    /**
+     * Get wYear
+     *
+     * @return integer
+     */
+    public function getWYear()
+    {
+        return $this->wYear;
+    }
+
+    /**
+     * Set wMonth
+     *
+     * @param integer $wMonth
+     *
+     * @return Activity
+     */
+    public function setWMonth($wMonth)
+    {
+        $this->wMonth = $wMonth;
+
+        return $this;
+    }
+
+    /**
+     * Get wMonth
+     *
+     * @return integer
+     */
+    public function getWMonth()
+    {
+        return $this->wMonth;
+    }
+
+
+
+    /**
+     * Set wHalf
+     *
+     * @param integer $wHalf
+     *
+     * @return Activity
+     */
+    public function setWHalf($wHalf)
+    {
+        $this->wHalf = $wHalf;
+
+        return $this;
+    }
+
+    /**
+     * Get wHalf
+     *
+     * @return integer
+     */
+    public function getWHalf()
+    {
+        return $this->wHalf;
+    }
+
+    /**
+     * Set lastUpdateBy
+     *
+     * @param integer $lastUpdateBy
+     *
+     * @return Activity
+     */
+    public function setLastUpdateBy($lastUpdateBy)
+    {
+        $this->lastUpdateBy = $lastUpdateBy;
+
+        return $this;
+    }
+
+    /**
+     * Get lastUpdateBy
+     *
+     * @return integer
+     */
+    public function getLastUpdateBy()
+    {
+        return $this->lastUpdateBy;
+    }
+
+    /**
+     * Set lastUpdateAt
+     *
+     * @param integer $lastUpdateAt
+     *
+     * @return Activity
+     */
+    public function setLastUpdateAt($lastUpdateAt)
+    {
+        $this->lastUpdateAt = $lastUpdateAt;
+
+        return $this;
+    }
+
+    /**
+     * Get lastUpdateAt
+     *
+     * @return integer
+     */
+    public function getLastUpdateAt()
+    {
+        return $this->lastUpdateAt;
+    }
+
+    /**
+     * Set offer
+     *
+     * @param integer $offer
+     *
+     * @return Activity
+     */
+    public function setOffer($offer)
+    {
+        $this->offer = $offer;
+
+        return $this;
+    }
+
+    /**
+     * Get offer
+     *
+     * @return integer
+     */
+    public function getOffer()
+    {
+        return $this->offer;
+    }
+
+    /**
+     * Set gama
+     *
+     * @param string $gama
+     *
+     * @return Activity
+     */
+    public function setGama($gama)
+    {
+        $this->gama = $gama;
+
+        return $this;
+    }
+
+    /**
+     * Get gama
+     *
+     * @return string
+     */
+    public function getGama()
+    {
+        return $this->gama;
+    }
+
+    /**
+     * Set header
+     *
+     * @param string $header
+     *
+     * @return \AppBundle\Entity\header
+     */
+    public function setHeader(\AppBundle\Entity\header $header = null)
+    {
+        $this->header = $header;
+
+        return $this;
+    }
+
+    /**
+     * Get header
+     *
+     * @return string
+     */
+    public function getHeader()
+    {
+        return $this->header;
+    }
+
+    /**
+     * Set additional
+     *
+     * @param string $additional
+     *
+     * @return Activity
+     */
+    public function setAdditional($additional)
+    {
+        $this->additional = $additional;
+
+        return $this;
+    }
+
+    /**
+     * Get additional
+     *
+     * @return string
+     */
+    public function getAdditional()
+    {
+        return $this->additional;
+    }
+
+    /**
+     * Set clientId
+     *
+     * @param integer $clientId
+     *
+     * @return Activity
+     */
+    // public function setClientId($clientId)
+    // {
+    //     $this->client_id = $clientId;
+
+    //     return $this;
+    // }
+
+    // /**
+    //  * Get clientId
+    //  *
+    //  * @return integer
+    //  */
+    // public function getClientId()
+    // {
+    //     return $this->client_id;
+    // }
+
+    /**
+     * Set brandId
+     *
+     * @param integer $brandId
+     *
+     * @return Activity
+     */
+    public function setBrandId($brandId)
+    {
+        $this->brand_id = $brandId;
+
+        return $this;
+    }
+
+    /**
+     * Get brandId
+     *
+     * @return integer
+     */
+    public function getBrandId()
+    {
+        return $this->brand_id;
+    }
+
+    /**
+     * Set client
+     *
+     * @param \AppBundle\Entity\Client $client
+     *
+     * @return Activity
+     */
+    public function setClient(\AppBundle\Entity\Client $client = null)
+    {
+        $this->client = $client;
+
+        return $this;
+    }
+
+    /**
+     * Get client
+     *
+     * @return \AppBundle\Entity\Client
+     */
+    public function getClient()
+    {
+        return $this->client;
+    }
+
+    /**
+     * Set brand
+     *
+     * @param \AppBundle\Entity\Brand $brand
+     *
+     * @return Activity
+     */
+    public function setBrand(\AppBundle\Entity\Brand $brand = null)
+    {
+        $this->brand = $brand;
+
+        return $this;
+    }
+
+    /**
+     * Get brand
+     *
+     * @return \AppBundle\Entity\Brand
+     */
+    public function getBrand()
+    {
+        return $this->brand;
+    }
+
+
+
+    /**
+     * Set status
+     *
+     * @param integer $status
+     *
+     * @return Activity
+     */
+    public function setStatus($status)
+    {
+        $this->Status = $status;
+
+        return $this;
+    }
+
+    /**
+     * Get status
+     *
+     * @return integer
+     */
+    public function getStatus()
+    {
+        return $this->Status;
+    }
+
+    /**
+     * Set kpi
+     *
+     * @param string $kpi
+     *
+     * @return Activity
+     */
+    public function setKpi($kpi)
+    {
+        $this->kpi = $kpi;
+
+        return $this;
+    }
+
+    /**
+     * Get kpi
+     *
+     * @return string
+     */
+    public function getKpi()
+    {
+        return $this->kpi;
+    }
+
+    /**
+     * Set expositionQuality
+     *
+     * @param \AppBundle\Entity\ExpositionQuality $expositionQuality
+     *
+     * @return Activity
+     */
+    public function setExpositionQuality(\AppBundle\Entity\ExpositionQuality $expositionQuality = null)
+    {
+        $this->exposition_Quality = $expositionQuality;
+
+        return $this;
+    }
+
+    /**
+     * Get expositionQuality
+     *
+     * @return \AppBundle\Entity\exposition_quality
+     */
+    public function getExpositionQuality()
+    {
+        return $this->exposition_Quality;
+    }
+
+    /**
+     * Set offerQuality
+     *
+     * @param \AppBundle\Entity\OfferQuality $offerQuality
+     *
+     * @return Activity
+     */
+    public function setOfferQuality(\AppBundle\Entity\OfferQuality $offerQuality = null)
+    {
+        $this->Offer_Quality = $offerQuality;
+
+        return $this;
+    }
+
+    /**
+     * Get offerQuality
+     *
+     * @return \AppBundle\Entity\Offer_quality
+     */
+    public function getOfferQuality()
+    {
+        return $this->Offer_Quality;
+    }
+  
+
+    /**
+     * Set msImpact
+     *
+     * @param \AppBundle\Entity\shops
+     *
+     * @return Activity
+     */
+    public function setMsImpact(\AppBundle\Entity\msImpact $msImpact)
+    {
+        $this->ms_impact = $msImpact;
+
+        return $this;
+    }
+
+    /**
+     * Get msImpact
+     *
+     * @return string
+     */
+    public function getMsImpact()
+    {
+        return $this->ms_impact;
+    }
+    /**
+     * Constructor
+     */
+    public function __construct()
+    {
+        $this->shops = new \Doctrine\Common\Collections\ArrayCollection();
+    }
+
+    /**
+     * Add shop
+     *
+     * @param \AppBundle\Entity\shops $shop
+     *
+     * @return Activity
+     */
+    public function addShop(\AppBundle\Entity\shops $shop)
+    {
+        $this->shops[] = $shop;
+
+        return $this;
+    }
+
+    /**
+     * Remove shop
+     *
+     * @param \AppBundle\Entity\shops $shop
+     */
+    public function removeShop(\AppBundle\Entity\shops $shop)
+    {
+        $this->shops->removeElement($shop);
+    }
+
+    /**
+     * Get shops
+     *
+     * @return \Doctrine\Common\Collections\Collection
+     */
+    public function getShops()
+    {
+        return $this->shops;
+    }
+
+
+    /**
+     * Get  sub brands shops
+     *
+     * @return \Doctrine\Common\Collections\Collection
+     */
+    public function getAllShops()
+    {
+        $result=[];
+        //get shopasof this brand 
+        $activityBrandshops=$this->getBrand()->getActivityShops($this);
+        if($activityBrandshops)
+        {
+            $obj=[
+                'hq_shops'=>(int)$activityBrandshops->getShopsHqValue(),
+                'gpv_shops'=>(int)$activityBrandshops->getShopsGpvValue(),
+                'shops_total'=>(int)$activityBrandshops->getShopsHqValue()+$activityBrandshops->getShopsGpvValue()
+            ];
+            $result[]=$obj;
+        }
+
+       
+        //dump($shops);die();
+
+       //get sub brand of brand 
+       $subBrands= $this->getBrand()->getChildren();
+       //array_push($subBrands,$this);
+       //dump($subBrands);die();
+      
+       $data = iterator_to_array($subBrands);//6 7
+       if($data){
+        foreach ($data as $key => $brand) {
+
+            //subbrands of activity brand
+           // dump($item->getId());die();
+            //dump());die();
+
+            $shops=$brand->getActivityShops($this); //6 
+           // dump($shops);die(); //
+        if($shops){
+                    $obj=[
+                            'hq_'.$brand->getId() =>(int)$shops->getShopsGpvValue(),
+                            'gpv_'.$brand->getId()=>(int)$shops->getShopsHqValue(),
+                            'total_'.$brand->getId()=>(int)$shops->getShopsGpvValue()+$shops->getShopsHqValue(),
+                            'id'=>$shops->getBrand()->getId(),
+                        ];
+                }
+                // else{
+                //     $obj=[
+                //             str_replace(' ', '_',$brand->getName()).'_hq'=>"",
+                //             str_replace(' ', '_',$brand->getName()).'_gpv'=>"",
+                //             str_replace(' ', '_',$brand->getName()).'_total'=>""
+                            
+                //     ];
+                // }
+               
+                $result[]=$obj;
+           }
+           return $result;
+
+       }
+    //    else{
+    //        return $subBrands;;
+
+    //    }
+
+      
+    }
+
+    /**
+     * Get  sub brands shops
+     *return  brand activity hq value or brand activity and subbrand hq value 
+     * @return \Doctrine\Common\Collections\Collection
+     */
+    public function getHqShops()
+    {
+        //To DO
+        $result=[];
+        //get shops of this brand 
+        $activityBrandshops=$this->getBrand()->getActivityShops($this); 
+        
+        if($activityBrandshops)
+        {
+            $result['hq_shops']=(int)$activityBrandshops->getShopsHqValue();
+        }else{
+            $result['hq_shops']=null;
+        }
+      
+       //get sub brand of brand 
+       $subBrands= $this->getBrand()->getChildren();
+       $data = iterator_to_array($subBrands);         // brand has sub brand 6, 7
+       if($data)
+       {
+        foreach ($data as $key => $brand) 
+        {
+            $shops=$brand->getActivityShops($this); //6 
+            if($shops)
+            {
+                $result['hq_'.$brand->getId()]=(int)$shops->getShopsHqValue();
+            }else
+            {
+                $result['hq_'.$brand->getId()]=null;
+            }    
+        }
+       
+
+       } 
+       return $result;
+    }
+
+    /**
+    * Get  sub brands shops
+    *
+    * @return \Doctrine\Common\Collections\Collection
+    */
+   public function getGpvShops()
+   {
+       $result=[];
+       //get shops of this brand 
+       $activityBrandshops=$this->getBrand()->getActivityShops($this); 
+
+       if($activityBrandshops)
+       {
+         //dump($activityBrandshops);die();
+           $result['gpv_shops']=(int)$activityBrandshops->getShopsGpvValue();
+       }else
+       {
+        $result['gpv_shops']=null;
+       }
+
+      //get sub brand of brand 
+      $subBrands= $this->getBrand()->getChildren();
+      $data = iterator_to_array($subBrands); 
+              // brand has sub brand  like 6, 7
+      if($data){
+       foreach ($data as $key => $brand) 
+       {
+           $shops=$brand->getActivityShops($this); //6 
+           if($shops)
+           {
+            //dump($shops);die();
+               $result['gpv_'.$brand->getId()]=(int)$shops->getShopsGpvValue();
+           }else
+           {
+               $result['gpv_'.$brand->getId()]=null;
+           }
+
+              
+       }
+       //dump($result);die();
+       return $result;
+
+      }
+      return $result; 
+   }
+
+    /**
+    * Get  sub brands shops
+    *
+    * @return \Doctrine\Common\Collections\Collection
+    */
+   public function getTotalShops()
+   {
+       $result=[];
+       //get shops of this brand 
+       $activityBrandshops=$this->getBrand()->getActivityShops($this); 
+       if($activityBrandshops)
+       {
+           //$obj=
+           $result['total_shops']=(int)$activityBrandshops->getShopsHqValue()+(int)$activityBrandshops->getShopsGpvValue();
+       }else
+       {
+        $result['total_shops']=null;
+       }
+
+      //get sub brand of brand 
+      $subBrands= $this->getBrand()->getChildren();
+      $data = iterator_to_array($subBrands);         // brand has sub brand 6, 7
+      if($data){
+       foreach ($data as $key => $brand) 
+       {
+           $shops=$brand->getActivityShops($this); //6 
+           if($shops)
+           {
+               //$obj=
+               
+               $result['total_'.$brand->getId()]=(int)$shops->getShopsHqValue()+(int)$shops->getShopsGpvValue();
+           }else
+           {
+               $result['total_'.$brand->getId()]=null;
+           }
+
+              
+       }
+       //dump($result);die();
+       
+
+      } 
+      return $result;
+   }
+    
+
+    
+
+  
+
+
+
+   
+
+    /**
+     * Set headerlastUpdateAt
+     *
+     * @param \DateTime $headerlastUpdateAt
+     *
+     * @return Activity
+     */
+    public function setHeaderlastUpdateAt($headerlastUpdateAt)
+    {
+        $this->headerlastUpdateAt = $headerlastUpdateAt;
+
+        return $this;
+    }
+
+    /**
+     * Get headerlastUpdateAt
+     *
+     * @return \DateTime
+     */
+    public function getHeaderlastUpdateAt()
+    {
+        return $this->headerlastUpdateAt;
+    }
+
+    /**
+     * Set headerExtraInfo
+     *
+     * @param string $headerExtraInfo
+     *
+     * @return Activity
+     */
+    public function setHeaderExtraInfo($headerExtraInfo)
+    {
+        $this->headerExtraInfo = $headerExtraInfo;
+
+        return $this;
+    }
+
+    /**
+     * Get headerExtraInfo
+     *
+     * @return string
+     */
+    public function getHeaderExtraInfo()
+    {
+        return $this->headerExtraInfo;
+    }
+
+    /**
+     * Set headerlastUpdateBy
+     *
+     * @param \AppBundle\Entity\User $headerlastUpdateBy
+     *
+     * @return Activity
+     */
+    public function setHeaderlastUpdateBy(\AppBundle\Entity\User $headerlastUpdateBy = null)
+    {
+        $this->headerlastUpdateBy = $headerlastUpdateBy;
+
+        return $this;
+    }
+
+    /**
+     * Get headerlastUpdateBy
+     *
+     * @return \AppBundle\Entity\User
+     */
+    public function getHeaderlastUpdateBy()
+    {
+        return $this->headerlastUpdateBy;
+    }
+
+    /**
+     * Set oldId
+     *
+     * @param integer $oldId
+     *
+     * @return Activity
+     */
+    public function setOldId($oldId)
+    {
+        $this->old_id = $oldId;
+
+        return $this;
+    }
+
+    /**
+     * Get oldId
+     *
+     * @return integer
+     */
+    public function getOldId()
+    {
+        return $this->old_id;
+    }
+
+    /**
+     * Set lastUpdatedAt
+     *
+     * @param \DateTime $lastUpdatedAt
+     *
+     * @return Activity
+     */
+    public function setLastUpdatedAt($lastUpdatedAt)
+    {
+        $this->lastUpdatedAt = $lastUpdatedAt;
+
+        return $this;
+    }
+
+    /**
+     * Get lastUpdatedAt
+     *
+     * @return \DateTime
+     */
+    public function getLastUpdatedAt()
+    {
+        return $this->lastUpdatedAt;
+    }
+
+    /**
+     * Set lastUpdatedBy
+     *
+     * @param \AppBundle\Entity\User $lastUpdatedBy
+     *
+     * @return Activity
+     */
+    public function setLastUpdatedBy(\AppBundle\Entity\User $lastUpdatedBy = null)
+    {
+        $this->lastUpdatedBy = $lastUpdatedBy;
+
+        return $this;
+    }
+
+    /**
+     * Get lastUpdatedBy
+     *
+     * @return \AppBundle\Entity\User
+     */
+    public function getLastUpdatedBy()
+    {
+        if($this->lastUpdatedBy)
+        {
+            return $this->lastUpdatedBy->getFullName();
+        }
+    }
+}

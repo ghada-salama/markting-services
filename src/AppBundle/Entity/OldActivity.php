@@ -1,0 +1,931 @@
+<?php
+
+namespace AppBundle\Entity;
+
+use Doctrine\ORM\Mapping as ORM;
+use JMS\Serializer\Annotation as JMSSerializer;
+use Symfony\Component\Validator\Constraints as Assert;
+//activity_old
+/**
+ * RealData
+ *
+ * @ORM\Table(name="old_activity")
+ * @ORM\Entity(repositoryClass="AppBundle\Repository\OldActivityRepository")
+ */
+class OldActivity
+{
+    /**
+     * @var int
+     *
+     * @ORM\Column(name="id", type="integer")
+     * @ORM\Id
+     * @ORM\GeneratedValue(strategy="AUTO")
+     */
+    private $id;
+
+   /**
+    * @ORM\Column(name="flag", type="integer",nullable=true)
+     */
+    private $flag=0;
+
+    /**
+    * @ORM\Column(name="IDClient", type="integer",nullable=true)S
+     */
+    private $IDClient;
+
+
+
+    /**
+    * @ORM\Column(name="IDBrand", type="integer",nullable=true)
+     */
+    private $IDBrand;
+
+
+    /**
+     * @var int
+     *
+     * @ORM\Column(name="wYear", type="integer",nullable=true)
+     */
+    private $WYear;
+
+    /**
+     * @var int
+     *
+     * @ORM\Column(name="wMonth", type="integer",nullable=true)
+     */
+    private $WMonth;
+
+    
+    /**
+     * @var int
+     *
+     * @ORM\Column(name="WHalf", type="integer",nullable=true)
+     */
+    private $WHalf;
+
+
+      /**
+     * @ORM\Column(name="name", type="integer",nullable=true)
+     
+     */
+    private $name;
+
+
+      /**
+     * @ORM\Column(name="LastUpdatedBy", type="integer",nullable=true)
+     
+     */
+    private $lastUpdatedBy;
+
+    /**
+     * @var string
+     * @ORM\Column(name="LastUpdatedDate", type="datetime", length=255,nullable=true)
+
+     */
+    private $LastUpdatedDate;
+
+    /**
+     * @var int
+     *
+     * @ORM\Column(name="NShops", type="string", length=255,nullable=true)
+     */
+    private $NShops;
+
+
+    /**
+     * @var int
+     *
+     * @ORM\Column(name="NShops0", type="string", length=255,nullable=true)
+     */
+    private $NShops0;
+
+    /**
+     * @var int
+     *
+     * @ORM\Column(name="NShops1", type="string", length=255,nullable=true)
+     */
+    private $NShops1;
+
+
+    /**
+     * @var int
+     *
+     * @ORM\Column(name="NShops2", type="string", length=255,nullable=true)
+     */
+    private $NShops2;
+
+    /**
+     * @var int
+     *
+     * @ORM\Column(name="NShops3", type="integer",nullable=true)
+
+     */
+    private $NShops3;
+
+     /**
+     * @var int
+     *
+     * @ORM\Column(name="NShops4", type="string", length=255,nullable=true)
+     */
+    private $NShops4;
+
+    /**
+     * @var int
+     *
+     * @ORM\Column(name="NShops5", type="string", length=255,nullable=true)
+     */
+    private $NShops5;
+
+    /**
+     * @var int
+     *
+     * @ORM\Column(name="NShops6", type="string", length=255,nullable=true)
+
+     */
+    private $NShops6;
+    
+
+     /**
+     * @var int
+     *
+     * @ORM\Column(name="NShops7", type="string", length=255,nullable=true)
+
+     */
+    private $NShops7;
+    
+
+    /**
+     * @var int
+     *
+     * @ORM\Column(name="NShops8", type="string", length=255,nullable=true)
+     */
+    private $NShops8;
+    
+
+    /**
+     * @var int
+     *
+     * @ORM\Column(name="NShops9", type="string", length=255,nullable=true)
+
+     */
+    private $NShops9;
+    
+
+    
+    /**
+     * @var string
+     *
+     * @ORM\Column(name="Oferta", type="string", length=255,nullable=true)
+     */
+    private $Oferta;
+
+    /**
+     * @var int
+     *
+     * @ORM\Column(name="IDRatio", type="integer",nullable=true)
+
+     */
+    private $IDRatio;
+
+    /**
+     * @var string
+     *
+     * @ORM\Column(name="Folleto", type="string", length=255,nullable=true)
+     */
+    private $Folleto;
+
+     /**
+     * @var string
+     *
+     * @ORM\Column(name="Cabecera", type="string", length=255,nullable=true)
+     */
+    private $Cabecera;
+
+    /**
+     * @var int
+     *
+     * @ORM\Column(name="IDStatus", type="integer",nullable=true)
+
+     */
+    private $IDStatus;
+
+
+      /**
+     * @var string
+     *
+     * @ORM\Column(name="Adicional", type="string", length=255,nullable=true)
+     */
+    private $Adicional;
+    
+    /**
+     * @var int
+     *
+     * @ORM\Column(name="IDCalidadExp", type="integer",nullable=true)
+
+     */
+    private $IDCalidadExp;
+    
+    /**
+     * @var int
+     *
+     * @ORM\Column(name="IDCalidadOf", type="integer",nullable=true)
+
+     */
+    private $IDCalidadOf;
+    
+
+    /**
+     * @var int
+     *
+     * @ORM\Column(name="KPIQuality", type="integer",nullable=true)
+
+     */
+    private $KPIQuality;
+    
+
+  
+
+
+
+    /**
+     * Get id
+     *
+     * @return int
+     */
+    public function getId()
+    {
+        return $this->id;
+    }
+
+    /**
+     * Set wYear
+     *
+     * @param integer $wYear
+     *
+     * @return RealData
+     */
+    public function setWYear($wYear)
+    {
+        $this->WYear = $wYear;
+
+        return $this;
+    }
+
+    /**
+     * Get wYear
+     *
+     * @return integer
+     */
+    public function getWYear()
+    {
+        return $this->WYear;
+    }
+
+    /**
+     * Set wMonth
+     *
+     * @param integer $wMonth
+     *
+     * @return RealData
+     */
+    public function setWMonth($wMonth)
+    {
+        $this->WMonth = $wMonth;
+
+        return $this;
+    }
+
+    /**
+     * Get wMonth
+     *
+     * @return integer
+     */
+    public function getWMonth()
+    {
+        return $this->WMonth;
+    }
+
+    /**
+     * Set wHalf
+     *
+     * @param integer $wHalf
+     *
+     * @return RealData
+     */
+    public function setWHalf($wHalf)
+    {
+        $this->WHalf = $wHalf;
+
+        return $this;
+    }
+
+    /**
+     * Get wHalf
+     *
+     * @return integer
+     */
+    public function getWHalf()
+    {
+        return $this->WHalf;
+    }
+
+    /**
+     * Set nShops
+     *
+     * @param integer $nShops
+     *
+     * @return RealData
+     */
+    public function setNShops($nShops)
+    {
+        $this->NShops = $nShops;
+
+        return $this;
+    }
+
+    /**
+     * Get nShops
+     *
+     * @return integer
+     */
+    public function getNShops()
+    {
+        return $this->NShops;
+    }
+
+    /**
+     * Set nShops0
+     *
+     * @param integer $nShops0
+     *
+     * @return RealData
+     */
+    public function setNShops0($nShops0)
+    {
+        $this->NShops0 = $nShops0;
+
+        return $this;
+    }
+
+    /**
+     * Get nShops0
+     *
+     * @return integer
+     */
+    public function getNShops0()
+    {
+        return $this->NShops0;
+    }
+
+    /**
+     * Set nShops1
+     *
+     * @param integer $nShops1
+     *
+     * @return RealData
+     */
+    public function setNShops1($nShops1)
+    {
+        $this->NShops1 = $nShops1;
+
+        return $this;
+    }
+
+    /**
+     * Get nShops1
+     *
+     * @return integer
+     */
+    public function getNShops1()
+    {
+        return $this->NShops1;
+    }
+
+    /**
+     * Set nShops2
+     *
+     * @param integer $nShops2
+     *
+     * @return RealData
+     */
+    public function setNShops2($nShops2)
+    {
+        $this->NShops2 = $nShops2;
+
+        return $this;
+    }
+
+    /**
+     * Get nShops2
+     *
+     * @return integer
+     */
+    public function getNShops2()
+    {
+        return $this->NShops2;
+    }
+
+    /**
+     * Set nShops3
+     *
+     * @param integer $nShops3
+     *
+     * @return RealData
+     */
+    public function setNShops3($nShops3)
+    {
+        $this->NShops3 = $nShops3;
+
+        return $this;
+    }
+
+    /**
+     * Get nShops3
+     *
+     * @return integer
+     */
+    public function getNShops3()
+    {
+        return $this->NShops3;
+    }
+
+    /**
+     * Set nShops4
+     *
+     * @param integer $nShops4
+     *
+     * @return RealData
+     */
+    public function setNShops4($nShops4)
+    {
+        $this->NShops4 = $nShops4;
+
+        return $this;
+    }
+
+    /**
+     * Get nShops4
+     *
+     * @return integer
+     */
+    public function getNShops4()
+    {
+        return $this->NShops4;
+    }
+
+    /**
+     * Set nShops5
+     *
+     * @param integer $nShops5
+     *
+     * @return RealData
+     */
+    public function setNShops5($nShops5)
+    {
+        $this->NShops5 = $nShops5;
+
+        return $this;
+    }
+
+    /**
+     * Get nShops5
+     *
+     * @return integer
+     */
+    public function getNShops5()
+    {
+        return $this->NShops5;
+    }
+
+    /**
+     * Set nShops6
+     *
+     * @param integer $nShops6
+     *
+     * @return RealData
+     */
+    public function setNShops6($nShops6)
+    {
+        $this->NShops6 = $nShops6;
+
+        return $this;
+    }
+
+    /**
+     * Get nShops6
+     *
+     * @return integer
+     */
+    public function getNShops6()
+    {
+        return $this->NShops6;
+    }
+
+    /**
+     * Set nShops7
+     *
+     * @param integer $nShops7
+     *
+     * @return RealData
+     */
+    public function setNShops7($nShops7)
+    {
+        $this->NShops7 = $nShops7;
+
+        return $this;
+    }
+
+    /**
+     * Get nShops7
+     *
+     * @return integer
+     */
+    public function getNShops7()
+    {
+        return $this->NShops7;
+    }
+
+    /**
+     * Set nShops8
+     *
+     * @param integer $nShops8
+     *
+     * @return RealData
+     */
+    public function setNShops8($nShops8)
+    {
+        $this->NShops8 = $nShops8;
+
+        return $this;
+    }
+
+    /**
+     * Get nShops8
+     *
+     * @return integer
+     */
+    public function getNShops8()
+    {
+        return $this->NShops8;
+    }
+
+    /**
+     * Set nShops9
+     *
+     * @param integer $nShops9
+     *
+     * @return RealData
+     */
+    public function setNShops9($nShops9)
+    {
+        $this->NShops9 = $nShops9;
+
+        return $this;
+    }
+
+    /**
+     * Get nShops9
+     *
+     * @return integer
+     */
+    public function getNShops9()
+    {
+        return $this->NShops9;
+    }
+
+    /**
+     * Set iDClient
+     *
+     * @param \AppBundle\Entity\Client $iDClient
+     *
+     * @return RealData
+     */
+    public function setIDClient(\AppBundle\Entity\Client $iDClient = null)
+    {
+        $this->IDClient = $iDClient;
+
+        return $this;
+    }
+
+    /**
+     * Get iDClient
+     *
+     * @return \AppBundle\Entity\Client
+     */
+    public function getIDClient()
+    {
+        return $this->IDClient;
+    }
+
+    /**
+     * Set iDBrand
+     *
+     * @param \AppBundle\Entity\Brand $iDBrand
+     *
+     * @return RealData
+     */
+    public function setIDBrand(\AppBundle\Entity\Brand $iDBrand = null)
+    {
+        $this->IDBrand = $iDBrand;
+
+        return $this;
+    }
+
+    /**
+     * Get iDBrand
+     *
+     * @return \AppBundle\Entity\Brand
+     */
+    public function getIDBrand()
+    {
+        return $this->IDBrand;
+    }
+
+    /**
+     * Set flag
+     *
+     * @param integer $flag
+     *
+     * @return OldActivity
+     */
+    public function setFlag($flag)
+    {
+        $this->flag = $flag;
+
+        return $this;
+    }
+
+    /**
+     * Get flag
+     *
+     * @return integer
+     */
+    public function getFlag()
+    {
+        return $this->flag;
+    }
+
+    /**
+     * Set oferta
+     *
+     * @param string $oferta
+     *
+     * @return OldActivity
+     */
+    public function setOferta($oferta)
+    {
+        $this->Oferta = $oferta;
+
+        return $this;
+    }
+
+    /**
+     * Get oferta
+     *
+     * @return string
+     */
+    public function getOferta()
+    {
+        return $this->Oferta;
+    }
+
+    /**
+     * Set iDRatio
+     *
+     * @param integer $iDRatio
+     *
+     * @return OldActivity
+     */
+    public function setIDRatio($iDRatio)
+    {
+        $this->IDRatio = $iDRatio;
+
+        return $this;
+    }
+
+    /**
+     * Get iDRatio
+     *
+     * @return integer
+     */
+    public function getIDRatio()
+    {
+        return $this->IDRatio;
+    }
+
+    /**
+     * Set folleto
+     *
+     * @param string $folleto
+     *
+     * @return OldActivity
+     */
+    public function setFolleto($folleto)
+    {
+        $this->Folleto = $folleto;
+
+        return $this;
+    }
+
+    /**
+     * Get folleto
+     *
+     * @return string
+     */
+    public function getFolleto()
+    {
+        return $this->Folleto;
+    }
+
+    /**
+     * Set iDStatus
+     *
+     * @param integer $iDStatus
+     *
+     * @return OldActivity
+     */
+    public function setIDStatus($iDStatus)
+    {
+        $this->IDStatus = $iDStatus;
+
+        return $this;
+    }
+
+    /**
+     * Get iDStatus
+     *
+     * @return integer
+     */
+    public function getIDStatus()
+    {
+        return $this->IDStatus;
+    }
+
+    /**
+     * Set adicional
+     *
+     * @param string $adicional
+     *
+     * @return OldActivity
+     */
+    public function setAdicional($adicional)
+    {
+        $this->Adicional = $adicional;
+
+        return $this;
+    }
+
+    /**
+     * Get adicional
+     *
+     * @return string
+     */
+    public function getAdicional()
+    {
+        return $this->Adicional;
+    }
+
+    /**
+     * Set iDCalidadExp
+     *
+     * @param integer $iDCalidadExp
+     *
+     * @return OldActivity
+     */
+    public function setIDCalidadExp($iDCalidadExp)
+    {
+        $this->IDCalidadExp = $iDCalidadExp;
+
+        return $this;
+    }
+
+    /**
+     * Get iDCalidadExp
+     *
+     * @return integer
+     */
+    public function getIDCalidadExp()
+    {
+        return $this->IDCalidadExp;
+    }
+
+    /**
+     * Set iDCalidadOf
+     *
+     * @param integer $iDCalidadOf
+     *
+     * @return OldActivity
+     */
+    public function setIDCalidadOf($iDCalidadOf)
+    {
+        $this->IDCalidadOf = $iDCalidadOf;
+
+        return $this;
+    }
+
+    /**
+     * Get iDCalidadOf
+     *
+     * @return integer
+     */
+    public function getIDCalidadOf()
+    {
+        return $this->IDCalidadOf;
+    }
+
+    /**
+     * Set kPIQuality
+     *
+     * @param integer $kPIQuality
+     *
+     * @return OldActivity
+     */
+    public function setKPIQuality($kPIQuality)
+    {
+        $this->KPIQuality = $kPIQuality;
+
+        return $this;
+    }
+
+    /**
+     * Get kPIQuality
+     *
+     * @return integer
+     */
+    public function getKPIQuality()
+    {
+        return $this->KPIQuality;
+    }
+
+    /**
+     * Set cabecera
+     *
+     * @param string $cabecera
+     *
+     * @return OldActivity
+     */
+    public function setCabecera($cabecera)
+    {
+        $this->Cabecera = $cabecera;
+
+        return $this;
+    }
+
+    /**
+     * Get cabecera
+     *
+     * @return string
+     */
+    public function getCabecera()
+    {
+        return $this->Cabecera;
+    }
+
+    /**
+     * Set lastUpdatedBy
+     *
+     * @param integer $lastUpdatedBy
+     *
+     * @return OldActivity
+     */
+    public function setLastUpdatedBy($lastUpdatedBy)
+    {
+        $this->lastUpdatedBy = $lastUpdatedBy;
+
+        return $this;
+    }
+
+    /**
+     * Get lastUpdatedBy
+     *
+     * @return integer
+     */
+    public function getLastUpdatedBy()
+    {
+        return $this->lastUpdatedBy;
+    }
+
+    /**
+     * Set lastUpdatedDate
+     *
+     * @param \DateTime $lastUpdatedDate
+     *
+     * @return OldActivity
+     */
+    public function setLastUpdatedDate($lastUpdatedDate)
+    {
+        $this->LastUpdatedDate = $lastUpdatedDate;
+
+        return $this;
+    }
+
+    /**
+     * Get lastUpdatedDate
+     *
+     * @return \DateTime
+     */
+    public function getLastUpdatedDate()
+    {
+        return $this->LastUpdatedDate;
+    }
+}

@@ -1,0 +1,237 @@
+FORMAT: 1A
+HOST: http://polls.apiblueprint.org/
+
+# SOA API
+
+    SOA is a simple API .
+    
+## header Collection [/header/]
+### List All header [GET]
+
++ Response 200 (application/json)
+ + Headers
+
+            Location: http://localhost:8001/api/header/list
+
+
+    {
+    "data": [
+                {
+                    "id": 2,
+                    "name": "header 2"
+                },
+                {
+                    "id": 5,
+                    "name": "ttttttttttttttttttttt"
+                },
+                {
+                    "id": 6,
+                    "name": "new header"
+                },
+                {
+                    "id": 7,
+                    "name": "we"
+                },
+                {
+                    "id": 8,
+                    "name": "weq"
+                }
+            ]
+    }
+### add  header [GET]
+
++ Response 200 (application/json)
+
+        [
+            {
+
+                "data": [
+                                {
+                                    "id": 1,
+                                    "name": "tytfsfsfsf",
+                                    "image_h": "ty"
+                                },
+                                {
+                                    "id": 2,
+                                    "name": "theme 2",
+                                    "image_h": "ty"
+                                },
+                                {
+                                    "id": 6,
+                                    "name": "new theme",
+                                    "image_h": null
+                                },
+                                {
+                                    "id": 7,
+                                    "name": "new theme",
+                                    "image_h": null
+                                },
+                                {
+                                    "id": 8,
+                                    "name": "new dddddddddddddddddd",
+                                    "image_h": null
+                                }
+                        ]
+
+        ]
+### edit header [GET]
+
++ Response 200 (application/json)
+
+        [
+            {
+
+                "data": [
+                                {
+                                    "id": 1,
+                                    "name": "tytfsfsfsf",
+                                    "image_h": "ty"
+                                },
+                                {
+                                    "id": 2,
+                                    "name": "theme 2",
+                                    "image_h": "ty"
+                                },
+                                {
+                                    "id": 6,
+                                    "name": "new theme",
+                                    "image_h": null
+                                },
+                                {
+                                    "id": 7,
+                                    "name": "new theme",
+                                    "image_h": null
+                                },
+                                {
+                                    "id": 8,
+                                    "name": "new dddddddddddddddddd",
+                                    "image_h": null
+                                }
+                        ]
+
+        ]
+### delete header[GET]
+
++ Response 200 (application/json)
+
+        [
+            {
+
+                "data": [
+                                {
+                                    "id": 1,
+                                    "name": "tytfsfsfsf",
+                                    "image_h": "ty"
+                                },
+                                {
+                                    "id": 2,
+                                    "name": "theme 2",
+                                    "image_h": "ty"
+                                },
+                                {
+                                    "id": 6,
+                                    "name": "new theme",
+                                    "image_h": null
+                                },
+                                {
+                                    "id": 7,
+                                    "name": "new theme",
+                                    "image_h": null
+                                },
+                                {
+                                    "id": 8,
+                                    "name": "new dddddddddddddddddd",
+                                    "image_h": null
+                                }
+                        ]
+
+        ]
+
+
+
+## theme Collection [/theme/{clientId}]
+
+### List All themes [GET]
+
++ Response 200 (application/json)
+
+        [
+            {
+
+                "data": [
+                                {
+                                    "id": 1,
+                                    "name": "tytfsfsfsf",
+                                    "image_h": "ty"
+                                },
+                                {
+                                    "id": 2,
+                                    "name": "theme 2",
+                                    "image_h": "ty"
+                                },
+                                {
+                                    "id": 6,
+                                    "name": "new theme",
+                                    "image_h": null
+                                },
+                                {
+                                    "id": 7,
+                                    "name": "new theme",
+                                    "image_h": null
+                                },
+                                {
+                                    "id": 8,
+                                    "name": "new dddddddddddddddddd",
+                                    "image_h": null
+                                }
+                        ]
+
+        ]
+
+### Create a New Question [POST]
+
+You may create your own question using this action. It takes a JSON
+object containing a question and a collection of answers in the
+form of choices.
+
++ Request (application/json)
+
+        {
+            "question": "Favourite programming language?",
+            "choices": [
+                "Swift",
+                "Python",
+                "Objective-C",
+                "Ruby"
+            ]
+        }
+
++ Response 201 (application/json)
+
+    + Headers
+
+            Location: /questions/2
+
+    + Body
+
+            {
+                "question": "Favourite programming language?",
+                "published_at": "2015-08-05T08:40:51.620Z",
+                "choices": [
+                    {
+                        "choice": "Swift",
+                        "votes": 0
+                    }, {
+                        "choice": "Python",
+                        "votes": 0
+                    }, {
+                        "choice": "Objective-C",
+                        "votes": 0
+                    }, {
+                        "choice": "Ruby",
+                        "votes": 0
+                    }
+                ]
+            }
+## client Collection [/clients/{clientId}]
+### List All clients [GET]

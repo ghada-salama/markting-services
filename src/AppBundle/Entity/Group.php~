@@ -1,0 +1,179 @@
+<?php
+// src/AppBundle/Entity/Group.php
+
+namespace AppBundle\Entity;
+
+use FOS\UserBundle\Model\Group as BaseGroup;
+use Doctrine\ORM\Mapping as ORM;
+use JMS\Serializer\Annotation as JMSSerializer;
+use Symfony\Component\Validator\Constraints as Assert;
+
+/**
+ * @ORM\Entity
+ * @ORM\Table(name="fos_group")
+ * @ORM\Entity(repositoryClass="UserBundle\Repository\GroupsRepository")
+ */
+class Group extends BaseGroup
+{
+    /**
+     * @ORM\Id
+     * @ORM\Column(type="integer")
+     * @ORM\GeneratedValue(strategy="AUTO")
+     * @JMSSerializer\Groups({"show_users","show_group","show_user_group"})
+     */
+     protected $id;
+    
+     
+ 
+
+    /**
+     * @var string
+     * @JMSSerializer\Expose
+     * @JMSSerializer\Type("string")
+     * @ORM\Column(name="observaciones", type="text")
+     * @JMSSerializer\Groups({"show_users","show_user_group","show_group"})
+     */
+    private $observaciones;
+
+
+
+
+    /**
+     * @ORM\ManyToMany(targetEntity="AppBundle\Entity\User")
+     * @ORM\JoinTable(name="fos_user_user_group",
+     *      joinColumns={@ORM\JoinColumn(name="group_id", referencedColumnName="id")},
+     *      inverseJoinColumns={@ORM\JoinColumn(name="user_id", referencedColumnName="id")}
+     * )
+     * @JMSSerializer\Groups({"show_user_group","show_group"})
+     */
+    protected $users;
+
+    /**
+     * @var string
+     *
+     * @ORM\Column(name="flag", type="boolean",nullable=true)
+     */
+    private $flag=0;
+
+     /**
+     * Group constructor.
+     *
+     * @param string $name
+     * @param array  $roles
+     */
+    public function __construct($name, $roles = array(),$observaciones)
+    {
+        $this->name = $name;
+        $this->roles = $roles;
+        $this->observaciones = $observaciones;
+    }
+ 
+
+
+    /**
+     * Set flag
+     *
+     * @param integer $flag
+     *
+     * @return Group
+     */
+    public function setFlag($flag)
+    {
+        $this->flag = $flag;
+
+        return $this;
+    }
+
+    /**
+     * Get flag
+     *
+     * @return integer
+     */
+    public function getFlag()
+    {
+        return $this->flag;
+    }
+
+    /**
+     * Add user
+     *
+     * @param \AppBundle\Entity\User $user
+     *
+     * @return Group
+     */
+    public function addUser(\AppBundle\Entity\User $user)
+    {
+        $this->users[] = $user;
+
+        return $this;
+    }
+
+    /**
+     * Remove user
+     *
+     * @param \AppBundle\Entity\User $user
+     */
+    public function removeUser(\AppBundle\Entity\User $user)
+    {
+        $this->users->removeElement($user);
+    }
+
+    /**
+     * Get users
+     *
+     * @return \Doctrine\Common\Collections\Collection
+     */
+    public function getUsers()
+    {
+        return $this->users;
+    }
+
+
+    /**
+     * Set observaciones
+     *
+     * @param string $observaciones
+     *
+     * @return Group
+     */
+    public function setObservaciones($observaciones)
+    {
+        $this->observaciones = $observaciones;
+
+        return $this;
+    }
+
+    /**
+     * Get observaciones
+     *
+     * @return string
+     */
+    public function getObservaciones()
+    {
+        return $this->observaciones;
+    }
+
+    /**
+     * Set description
+     *
+     * @param string $description
+     *
+     * @return Group
+     */
+    public function setDescription($description)
+    {
+        $this->description = $description;
+
+        return $this;
+    }
+
+    /**
+     * Get description
+     *
+     * @return string
+     */
+    public function getDescription()
+    {
+        return $this->description;
+    }
+}

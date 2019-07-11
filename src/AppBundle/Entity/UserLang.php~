@@ -1,0 +1,97 @@
+<?php
+
+namespace AppBundle\Entity;
+
+use Doctrine\ORM\Mapping as ORM;
+
+/**
+ * UserLang
+ *
+ * @ORM\Table(name="users_lang")
+ * @ORM\Entity(repositoryClass="AppBundle\Repository\UserLangRepository")
+ */
+class UserLang
+{
+    /**
+     * @var int
+     *
+     * @ORM\Column(name="id", type="integer")
+     * @ORM\Id
+     * @ORM\GeneratedValue(strategy="AUTO")
+     */
+    private $id;
+
+    /**
+     * @var string
+     *
+     * @ORM\Column(name="IDEmpleado", type="string", length=255)
+     */
+    private $iDEmpleado;
+
+    /**
+     * @var string
+     *
+     * @ORM\Column(name="Idioma", type="string", length=255)
+     */
+    private $idioma;
+
+
+    /**
+     * Get id
+     *
+     * @return int
+     */
+    public function getId()
+    {
+        return $this->id;
+    }
+
+    /**
+     * Set iDEmpleado
+     *
+     * @param string $iDEmpleado
+     *
+     * @return UserLang
+     */
+    public function setIDEmpleado($iDEmpleado)
+    {
+        $this->iDEmpleado = $iDEmpleado;
+
+        return $this;
+    }
+
+    /**
+     * Get iDEmpleado
+     *
+     * @return string
+     */
+    public function getIDEmpleado()
+    {
+        return $this->iDEmpleado;
+    }
+
+    /**
+     * Set idioma
+     *
+     * @param string $idioma
+     *
+     * @return UserLang
+     */
+    public function setIdioma($idioma)
+    {
+        $this->idioma = $idioma;
+
+        return $this;
+    }
+
+    /**
+     * Get idioma
+     *
+     * @return string
+     */
+    public function getIdioma()
+    {
+        return $this->idioma;
+    }
+}
+

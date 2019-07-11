@@ -1,0 +1,71 @@
+<?php
+
+namespace AppBundle\Entity;
+
+use Doctrine\ORM\Mapping as ORM;
+
+/**
+ * Nr
+ *
+ * @ORM\Table(name="nr")
+ * @ORM\Entity(repositoryClass="AppBundle\Repository\NrRepository")
+ */
+class Nr
+{
+    /**
+     * @var int
+     *
+     * @ORM\Column(name="id", type="integer")
+     * @ORM\Id
+     * @ORM\GeneratedValue(strategy="AUTO")
+     */
+    private $id;
+
+    /**
+     * @ORM\ManyToOne(targetEntity="Client", inversedBy="activities")
+     * @ORM\JoinColumn(name="client_id", referencedColumnName="id")
+     */
+    private $client;
+
+
+
+    /**
+     * @ORM\ManyToOne(targetEntity="Brand", inversedBy="activities")
+     * @ORM\JoinColumn(name="brand_id", referencedColumnName="id")
+     */
+    private $brand;
+
+
+    /**
+     * @var int
+     *
+     * @ORM\Column(name="wYear", type="integer")
+     */
+    private $wYear;
+
+    /**
+     * @var int
+     *
+     * @ORM\Column(name="wMonth", type="integer")
+     */
+    private $wMonth;
+
+    /**
+     * @var int
+     *
+     * @ORM\Column(name="nr", type="decimal", precision=10, scale=0)
+     */
+    private $nr;
+
+
+    /**
+     * Get id
+     *
+     * @return int
+     */
+    public function getId()
+    {
+        return $this->id;
+    }
+}
+

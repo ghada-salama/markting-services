@@ -1,0 +1,345 @@
+<?php
+
+namespace AppBundle\Entity;
+
+use Doctrine\ORM\Mapping as ORM;
+use JMS\Serializer\Annotation as JMSSerializer;
+use Symfony\Component\Validator\Constraints as Assert;
+
+/**
+ * Theme
+ *
+ * @ORM\Table(name="theme")
+ * @ORM\Entity(repositoryClass="AppBundle\Repository\ThemeRepository")
+ */
+class Theme
+{
+    
+   
+   
+
+    /**
+     * @var int
+     *
+     * @ORM\Column(name="id", type="integer")
+     * @ORM\Id
+     * @ORM\GeneratedValue(strategy="AUTO")
+     * @JMSSerializer\Groups({"show_activities","show_theme"})
+     */
+    private $id;
+
+     /**
+     * @ORM\ManyToOne(targetEntity="Client", inversedBy="client")
+     * @ORM\JoinColumn(name="client_id", referencedColumnName="id")
+     */
+    private $client;
+
+
+    /**
+     * @ORM\OneToMany(targetEntity="Activity", mappedBy="theme")
+     */
+    private $activities;
+
+
+    /**
+     * @var string
+     *
+     * @ORM\Column(name="name", type="string", length=255)
+     * @JMSSerializer\Groups({"show_activities","show_theme"})
+     * @Assert\NotBlank()
+     */
+    private $name;
+
+    /**
+     * @var string
+     * @ORM\Column(name="imageH", type="string", length=255,nullable=true)
+     * @Assert\File(mimeTypes={"image/jpeg", "image/png", "image/x-png", "image/pjpeg" })
+     * @JMSSerializer\Groups({"show_activities","show_theme"})
+     */
+
+    private $imageH;
+
+   /**
+     * @var int
+     *
+     * @JMSSerializer\Groups({"show_activities","show_theme"})
+     * @JMSSerializer\SerializedName("image_url")
+     * @JMSSerializer\Accessor(getter="getImageUrl")
+     */
+    private $image_url;
+
+    /**
+     * @var int
+     * @JMSSerializer\Expose
+     * @JMSSerializer\Type("integer")
+     * @JMSSerializer\Groups({"activity_component"})
+     * @ORM\Column(name="flag", type="integer", length=255,nullable=true)
+     */
+    private $flag= 0;
+
+
+    /**
+     * @ORM\ManyToOne(targetEntity="User", inversedBy="myUpdate")
+     * @ORM\JoinColumn(name="lastUpdatedBy", referencedColumnName="id")
+     * @JMSSerializer\Groups({"show_activities","get_add_activity"})
+     */
+    private $lastUpdatedBy;
+
+    /**
+     * @var string
+     *
+     * @ORM\Column(name="lastUpdatedAt", type="datetime", length=255)
+     */
+    private $lastUpdatedAt;
+
+
+    /**
+     * Constructor
+     */
+    public function __construct()
+    {
+        $this->activities = new \Doctrine\Common\Collections\ArrayCollection();
+    }
+
+    /**
+     * Get id
+     *
+     * @return integer
+     */
+    public function getId()
+    {
+        return $this->id;
+    }
+
+    /**
+     * Set name
+     *
+     * @param string $name
+     *
+     * @return Theme
+     */
+    public function setName($name)
+    {
+        $this->name = $name;
+
+        return $this;
+    }
+
+    /**
+     * Get name
+     *
+     * @return string
+     */
+    public function getName()
+    {
+        return $this->name;
+    }
+
+    /**
+     * Set imageH
+     *
+     * @param string $imageH
+     *
+     * @return Theme
+     */
+    public function setImageH($imageH)
+    {
+        $this->imageH = $imageH;
+
+        return $this;
+    }
+
+    /**
+     * Get imageH
+     *
+     * @return string
+     */
+    public function getImageH()
+    {
+        return $this->imageH;
+    }
+
+    /**
+     * Set imageV
+     *
+     * @param string $imageV
+     *
+     * @return Theme
+     */
+    public function setImageV($imageV)
+    {
+        $this->imageV = $imageV;
+
+        return $this;
+    }
+
+    /**
+     * Get imageV
+     *
+     * @return string
+     */
+    public function getImageV()
+    {
+        return $this->imageV;
+    }
+
+
+
+    /**
+     * Set lastUpdatedBy
+     *
+     * @param string $lastUpdatedBy
+     *
+     * @return Theme
+     */
+    public function setLastUpdatedBy($lastUpdatedBy)
+    {
+        $this->lastUpdatedBy = $lastUpdatedBy;
+
+        return $this;
+    }
+
+    /**
+     * Get lastUpdatedBy
+     *
+     * @return string
+     */
+    public function getLastUpdatedBy()
+    {
+        return $this->lastUpdatedBy;
+    }
+
+    /**
+     * Set lastUpdatedAt
+     *
+     * @param string $lastUpdatedAt
+     *
+     * @return Theme
+     */
+    public function setLastUpdatedAt($lastUpdatedAt)
+    {
+        $this->lastUpdatedAt = $lastUpdatedAt;
+
+        return $this;
+    }
+
+    /**
+     * Get lastUpdatedAt
+     *
+     * @return string
+     */
+    public function getLastUpdatedAt()
+    {
+        return $this->lastUpdatedAt;
+    }
+
+    /**
+     * Set client
+     *
+     * @param \AppBundle\Entity\Client $client
+     *
+     * @return Theme
+     */
+    public function setClient(\AppBundle\Entity\Client $client = null)
+    {
+        $this->client = $client;
+
+        return $this;
+    }
+
+    /**
+     * Get client
+     *
+     * @return \AppBundle\Entity\Client
+     */
+    public function getClient()
+    {
+        return $this->client;
+    }
+
+    /**
+     * Add activity
+     *
+     * @param \AppBundle\Entity\Activity $activity
+     *
+     * @return Theme
+     */
+    public function addActivity(\AppBundle\Entity\Activity $activity)
+    {
+        $this->activities[] = $activity;
+
+        return $this;
+    }
+
+    /**
+     * Remove activity
+     *
+     * @param \AppBundle\Entity\Activity $activity
+     */
+    public function removeActivity(\AppBundle\Entity\Activity $activity)
+    {
+        $this->activities->removeElement($activity);
+    }
+
+    /**
+     * Get activities
+     *
+     * @return \Doctrine\Common\Collections\Collection
+     */
+    public function getActivities()
+    {
+        return $this->activities;
+    }
+
+    /**
+     * Set flag
+     *
+     * @param string $flag
+     *
+     * @return Theme
+     */
+    public function setFlag($flag)
+    {
+        $this->flag = $flag;
+
+        return $this;
+    }
+
+    /**
+     * Get flag
+     *
+     * @return string
+     */
+    public function getFlag()
+    {
+        return $this->flag;
+    }
+
+    /**
+     * Set imageUrl
+     *
+     * @param string $imageUrl
+     *
+     * @return Theme
+     */
+    public function setImageUrl($imageUrl)
+    {
+        $this->image_url = $imageUrl;
+
+        return $this;
+    }
+
+    /**
+     * Get imageUrl
+     *
+     * @return string
+     */
+    public function getImageUrl()
+    {
+        if($this->imageH)
+        {
+            return '/web/uploads/gallery/'.$this->imageH;
+        }
+       // return ;
+    }
+}

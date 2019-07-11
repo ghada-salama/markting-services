@@ -1,0 +1,364 @@
+<?php
+
+namespace AppBundle\Entity;
+
+use Doctrine\ORM\Mapping as ORM;
+use JMS\Serializer\Annotation as JMSSerializer;
+use Symfony\Component\Validator\Constraints as Assert;
+/**
+ * GeneralTheme
+ *
+ * @ORM\Table(name="old_generaltheme")
+ * @ORM\Entity(repositoryClass="AppBundle\Repository\OldGeneralThemeRepository")
+ */
+class OldGeneralTheme
+{
+    /**
+     * @var int
+     *
+     * @ORM\Column(name="id", type="integer")
+     * @ORM\Id
+     * @ORM\GeneratedValue(strategy="AUTO")
+     */
+    private $id;
+
+    /**
+     * @var string
+     *
+     * @ORM\Column(name="WYear", type="string", length=255)
+     */
+    private $wYear;
+
+    /**
+     * @var string
+     *
+     * @ORM\Column(name="WMonth", type="string", length=255)
+     */
+    private $wMonth;
+
+    /**
+     * @var string
+     *
+     * @ORM\Column(name="WHalf", type="string", length=255)
+     */
+    private $wHalf;
+
+    /**
+     * @var string
+     *
+     * @ORM\Column(name="Name", type="string", length=255)
+     */
+    private $themeExtraInfo;
+
+    /**
+     * @var string
+     *
+     * @ORM\Column(name="LastUpdatedBy", type="string", length=255)
+     * @JMSSerializer\Groups({"show_activities","get_add_activity","add_theme"})
+     */
+    private $lastUpdatedBy;
+
+    /**
+     * @var string
+     *
+     * @ORM\Column(name="LastUpdatedDate", type="datetime", length=255)
+     * @JMSSerializer\Groups({"show_activities","get_add_activity","add_theme"})
+     */
+    private $lastUpdatedDate;
+
+
+    /**
+     * @ORM\Column(name="IDClient", type="integer", length=255)
+     */
+    private $client_id;
+
+ 
+    /**
+     * @ORM\Column(name="IDTheme", type="integer", length=255)
+     */
+    
+    private $theme_id;
+
+      /**
+        * @ORM\Column(name="flag", type="integer", length=255,nullable=true)
+     */
+    
+    private $flag;
+
+
+    /**
+     * Get id
+     *
+     * @return int
+     */
+    public function getId()
+    {
+        return $this->id;
+    }
+
+    /**
+     * Set wYear
+     *
+     * @param string $wYear
+     *
+     * @return GeneralTheme
+     */
+    public function setWYear($wYear)
+    {
+        $this->wYear = $wYear;
+
+        return $this;
+    }
+
+    /**
+     * Get wYear
+     *
+     * @return string
+     */
+    public function getWYear()
+    {
+        return $this->wYear;
+    }
+
+    /**
+     * Set wMonth
+     *
+     * @param string $wMonth
+     *
+     * @return GeneralTheme
+     */
+    public function setWMonth($wMonth)
+    {
+        $this->wMonth = $wMonth;
+
+        return $this;
+    }
+
+    /**
+     * Get wMonth
+     *
+     * @return string
+     */
+    public function getWMonth()
+    {
+        return $this->wMonth;
+    }
+
+    /**
+     * Set wHalf
+     *
+     * @param string $wHalf
+     *
+     * @return GeneralTheme
+     */
+    public function setWHalf($wHalf)
+    {
+        $this->wHalf = $wHalf;
+
+        return $this;
+    }
+
+    /**
+     * Get wHalf
+     *
+     * @return string
+     */
+    public function getWHalf()
+    {
+        return $this->wHalf;
+    }
+
+    /**
+     * Set name
+     *
+     * @param string $name
+     *
+     * @return GeneralTheme
+     */
+    public function setName($name)
+    {
+        $this->name = $name;
+
+        return $this;
+    }
+
+    /**
+     * Get name
+     *
+     * @return string
+     */
+    public function getName()
+    {
+        return $this->name;
+    }
+
+    /**
+     * Set lastUpdatedBy
+     *
+     * @param string $lastUpdatedBy
+     *
+     * @return GeneralTheme
+     */
+    public function setLastUpdatedBy($lastUpdatedBy)
+    {
+        $this->lastUpdatedBy = $lastUpdatedBy;
+
+        return $this;
+    }
+
+    /**
+     * Get lastUpdatedBy
+     *
+     * @return string
+     */
+    public function getLastUpdatedBy()
+    {
+        return $this->lastUpdatedBy;
+    }
+
+    /**
+     * Set lastUpdatedDate
+     *
+     * @param string $lastUpdatedDate
+     *
+     * @return GeneralTheme
+     */
+    public function setLastUpdatedDate($lastUpdatedDate)
+    {
+        $this->lastUpdatedDate = $lastUpdatedDate;
+
+        return $this;
+    }
+
+    /**
+     * Get lastUpdatedDate
+     *
+     * @return string
+     */
+    public function getLastUpdatedDate()
+    {
+        return $this->lastUpdatedDate;
+    }
+
+ 
+
+    /**
+     * Set iDTheme
+     *
+     * @param string $iDTheme
+     *
+     * @return GeneralTheme
+     */
+    public function setIDTheme($iDTheme)
+    {
+        $this->iDTheme = $iDTheme;
+
+        return $this;
+    }
+
+    /**
+     * Get iDTheme
+     *
+     * @return string
+     */
+    public function getIDTheme()
+    {
+        return $this->iDTheme;
+    }
+
+    /**
+     * Set clientId
+     *
+     * @param \AppBundle\Entity\Client $clientId
+     *
+     * @return GeneralTheme
+     */
+    public function setClientId(\AppBundle\Entity\Client $clientId = null)
+    {
+        $this->client_id = $clientId;
+
+        return $this;
+    }
+
+    /**
+     * Get clientId
+     *
+     * @return \AppBundle\Entity\Client
+     */
+    public function getClientId()
+    {
+        return $this->client_id;
+    }
+
+    /**
+     * Set themeId
+     *
+     * @param \AppBundle\Entity\Theme $themeId
+     *
+     * @return GeneralTheme
+     */
+    public function setThemeId(\AppBundle\Entity\Theme $themeId = null)
+    {
+        $this->theme_id = $themeId;
+
+        return $this;
+    }
+
+    /**
+     * Get themeId
+     *
+     * @return \AppBundle\Entity\Theme
+     */
+    public function getThemeId()
+    {
+        return $this->theme_id;
+    }
+
+    /**
+     * Set themeExtraInfo
+     *
+     * @param string $themeExtraInfo
+     *
+     * @return GeneralTheme
+     */
+    public function setThemeExtraInfo($themeExtraInfo)
+    {
+        $this->themeExtraInfo = $themeExtraInfo;
+
+        return $this;
+    }
+
+    /**
+     * Get themeExtraInfo
+     *
+     * @return string
+     */
+    public function getThemeExtraInfo()
+    {
+        return $this->themeExtraInfo;
+    }
+
+    /**
+     * Set flag
+     *
+     * @param integer $flag
+     *
+     * @return OldGeneralTheme
+     */
+    public function setFlag($flag)
+    {
+        $this->flag = $flag;
+
+        return $this;
+    }
+
+    /**
+     * Get flag
+     *
+     * @return integer
+     */
+    public function getFlag()
+    {
+        return $this->flag;
+    }
+}

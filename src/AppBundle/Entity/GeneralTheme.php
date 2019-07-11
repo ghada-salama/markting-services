@@ -1,0 +1,341 @@
+<?php
+
+namespace AppBundle\Entity;
+
+use Doctrine\ORM\Mapping as ORM;
+use JMS\Serializer\Annotation as JMSSerializer;
+use Symfony\Component\Validator\Constraints as Assert;
+/**
+ * GeneralTheme
+ *
+ * @ORM\Table(name="general_theme")
+ * @ORM\Entity(repositoryClass="AppBundle\Repository\GeneralThemeRepository")
+ */
+class GeneralTheme
+{
+    /**
+     * @var int
+     *
+     * @ORM\Column(name="id", type="integer")
+     * @ORM\Id
+     * @ORM\GeneratedValue(strategy="AUTO")
+     */
+    private $id;
+
+    /**
+     * @var string
+     *
+     * @ORM\Column(name="WYear", type="string", length=255)
+     */
+    private $wYear;
+
+    /**
+     * @var string
+     *
+     * @ORM\Column(name="WMonth", type="string", length=255)
+     */
+    private $wMonth;
+
+    /**
+     * @var string
+     *
+     * @ORM\Column(name="WHalf", type="string", length=255)
+     */
+    private $wHalf;
+
+    /**
+     * @var string
+     *
+     * @ORM\Column(name="themeExtraInfo", type="string", length=255,nullable=true)
+     */
+    private $themeExtraInfo;
+
+    /**
+     * @ORM\ManyToOne(targetEntity="User", inversedBy="myUpdate")
+     * @ORM\JoinColumn(name="lastUpdatedBy", referencedColumnName="id")
+     * @JMSSerializer\Groups({"show_activities","get_add_activity"})
+     */
+    private $lastUpdatedBy;
+
+    /**
+     * @var string
+     *
+     * @ORM\Column(name="LastUpdatedDate", type="datetime", length=255,nullable=true)
+     * @JMSSerializer\Groups({"show_activities","get_add_activity","add_theme"})
+     */
+    private $lastUpdatedDate;
+
+
+    /**
+     * @ORM\ManyToOne(targetEntity="Client", inversedBy="activities")
+     * @ORM\JoinColumn(name="client_id", referencedColumnName="id")
+     * @JMSSerializer\Groups({"show_activities","get_add_activity"})
+     */
+    private $client_id;
+
+ 
+    /**
+     * @ORM\ManyToOne(targetEntity="Theme", inversedBy="activities")
+     * @ORM\JoinColumn(name="theme_id", referencedColumnName="id")
+     * @JMSSerializer\Groups({"show_activities","get_add_activity"})
+     */
+    
+    private $theme_id;
+
+
+    /**
+     * Get id
+     *
+     * @return int
+     */
+    public function getId()
+    {
+        return $this->id;
+    }
+
+    /**
+     * Set wYear
+     *
+     * @param string $wYear
+     *
+     * @return GeneralTheme
+     */
+    public function setWYear($wYear)
+    {
+        $this->wYear = $wYear;
+
+        return $this;
+    }
+
+    /**
+     * Get wYear
+     *
+     * @return string
+     */
+    public function getWYear()
+    {
+        return $this->wYear;
+    }
+
+    /**
+     * Set wMonth
+     *
+     * @param string $wMonth
+     *
+     * @return GeneralTheme
+     */
+    public function setWMonth($wMonth)
+    {
+        $this->wMonth = $wMonth;
+
+        return $this;
+    }
+
+    /**
+     * Get wMonth
+     *
+     * @return string
+     */
+    public function getWMonth()
+    {
+        return $this->wMonth;
+    }
+
+    /**
+     * Set wHalf
+     *
+     * @param string $wHalf
+     *
+     * @return GeneralTheme
+     */
+    public function setWHalf($wHalf)
+    {
+        $this->wHalf = $wHalf;
+
+        return $this;
+    }
+
+    /**
+     * Get wHalf
+     *
+     * @return string
+     */
+    public function getWHalf()
+    {
+        return $this->wHalf;
+    }
+
+    /**
+     * Set name
+     *
+     * @param string $name
+     *
+     * @return GeneralTheme
+     */
+    public function setName($name)
+    {
+        $this->name = $name;
+
+        return $this;
+    }
+
+    /**
+     * Get name
+     *
+     * @return string
+     */
+    public function getName()
+    {
+        return $this->name;
+    }
+
+      /**
+     * Set lastUpdatedBy
+     *
+     * @param \AppBundle\Entity\User $lastUpdatedBy
+     *
+     * @return Activity
+     */
+    public function setLastUpdatedBy(\AppBundle\Entity\User $lastUpdatedBy = null)
+    {
+        $this->lastUpdatedBy = $lastUpdatedBy;
+
+        return $this;
+    }
+
+    /**
+     * Get lastUpdatedBy
+     *
+     * @return \AppBundle\Entity\User
+     */
+    public function getLastUpdatedBy()
+    {
+        if($this->lastUpdatedBy)
+        {
+            return $this->lastUpdatedBy->getFullName();
+        }
+       
+    }
+
+    /**
+     * Set lastUpdatedDate
+     *
+     * @param string $lastUpdatedDate
+     *
+     * @return GeneralTheme
+     */
+    public function setLastUpdatedDate($lastUpdatedDate)
+    {
+        $this->lastUpdatedDate = $lastUpdatedDate;
+
+        return $this;
+    }
+
+    /**
+     * Get lastUpdatedDate
+     *
+     * @return string
+     */
+    public function getLastUpdatedDate()
+    {
+        return $this->lastUpdatedDate;
+    }
+
+ 
+
+    /**
+     * Set iDTheme
+     *
+     * @param string $iDTheme
+     *
+     * @return GeneralTheme
+     */
+    public function setIDTheme($iDTheme)
+    {
+        $this->iDTheme = $iDTheme;
+
+        return $this;
+    }
+
+    /**
+     * Get iDTheme
+     *
+     * @return string
+     */
+    public function getIDTheme()
+    {
+        return $this->iDTheme;
+    }
+
+    /**
+     * Set clientId
+     *
+     * @param \AppBundle\Entity\Client $clientId
+     *
+     * @return GeneralTheme
+     */
+    public function setClientId(\AppBundle\Entity\Client $clientId = null)
+    {
+        $this->client_id = $clientId;
+
+        return $this;
+    }
+
+    /**
+     * Get clientId
+     *
+     * @return \AppBundle\Entity\Client
+     */
+    public function getClientId()
+    {
+        return $this->client_id;
+    }
+
+    /**
+     * Set themeId
+     *
+     * @param \AppBundle\Entity\Theme $themeId
+     *
+     * @return GeneralTheme
+     */
+    public function setThemeId(\AppBundle\Entity\Theme $themeId = null)
+    {
+        $this->theme_id = $themeId;
+
+        return $this;
+    }
+
+    /**
+     * Get themeId
+     *
+     * @return \AppBundle\Entity\Theme
+     */
+    public function getThemeId()
+    {
+        return $this->theme_id;
+    }
+
+    /**
+     * Set themeExtraInfo
+     *
+     * @param string $themeExtraInfo
+     *
+     * @return GeneralTheme
+     */
+    public function setThemeExtraInfo($themeExtraInfo)
+    {
+        $this->themeExtraInfo = $themeExtraInfo;
+
+        return $this;
+    }
+
+    /**
+     * Get themeExtraInfo
+     *
+     * @return string
+     */
+    public function getThemeExtraInfo()
+    {
+        return $this->themeExtraInfo;
+    }
+}
